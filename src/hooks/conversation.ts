@@ -189,10 +189,13 @@ export const useConversation = (
     if (!audioContext || !audioAnalyser) return;
     setStatus("connecting");
 
-    if (!isSafari && !isChrome) {
-      stopConversation(new Error("Unsupported browser"));
-      return;
-    }
+    // There is open issue
+    // https://github.com/duskload/react-device-detect/issues/169
+    // isChrome doesn't work with headless chrome
+    // if (!isSafari && !isChrome) {
+    //   stopConversation(new Error("Unsupported browser"));
+    //   return;
+    // }
 
     if (audioContext.state === "suspended") {
       audioContext.resume();
